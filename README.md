@@ -1,11 +1,8 @@
----
 
-### 📄 `README.md`
+```markdown
+# 🍽️ WaiterApp — Agilidade na palma da mão
 
-````
-# 🍽️ WaiterApp
-
-Aplicação web desenvolvida com Angular para gerenciamento de pedidos em estabelecimentos gastronômicos. Interface pensada para garçons, com foco em agilidade, responsividade e experiência semelhante a apps mobile.
+Aplicação web moderna desenvolvida com **Angular** para transformar a experiência de atendimento em bares e restaurantes. Projetada com foco nos **garçons**, oferece uma interface intuitiva, responsiva e com fluidez de app mobile. Seu objetivo? Tornar a gestão de pedidos rápida, prática e profissional.
 
 <p align="center">
   <img src="src/assets/images/logo.svg" alt="Logo do WaiterApp" width="180" />
@@ -13,33 +10,35 @@ Aplicação web desenvolvida com Angular para gerenciamento de pedidos em estabe
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Tecnologias de Ponta
 
-- [Angular 17+](https://angular.io/)
-- TypeScript
-- Reactive Forms
-- Angular Router (Lazy Loading)
-- SCSS Modularizado
-- Splash Screen personalizada
-- Estrutura por Feature
-- Preparado para PWA
+Utilizamos o que há de mais sólido e atual no ecossistema web:
 
----
-
-## 📦 Funcionalidades
-
-- Tela de login com formulário reativo e validação
-- Splash screen animada durante carregamento inicial
-- Componentes estilizados com fontes customizadas
-- Layout responsivo e centrado verticalmente
-- Estrutura escalável para módulos futuros como:
-  - Pedidos
-  - Cozinha
-  - Painel gerencial
+- 🔺 [Angular 17+](https://angular.io/) com Lazy Loading
+- 🟦 TypeScript moderno e tipado
+- 🔄 Reactive Forms e validações elegantes
+- 🚦 Angular Router modular
+- 🎨 SCSS modularizado para estilos reutilizáveis
+- 💥 Splash Screen animada e personalizada
+- 📁 Arquitetura por feature, escalável e bem organizada
+- 📱 Pronto para virar um Progressive Web App (PWA)
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🧩 Funcionalidades Principais
+
+- 🔐 Tela de login com formulário reativo e validações
+- 🎬 Animação de carregamento via Splash Screen
+- ✨ Componentes visuais com fontes customizadas
+- 📐 Layout verticalmente centralizado e adaptável a qualquer tela
+- 📈 Estrutura pronta para expansão com módulos como:
+  - 🧾 Gestão de Pedidos
+  - 👨‍🍳 Painel da Cozinha
+  - 📊 Painel Gerencial
+
+---
+
+## 🗂️ Estrutura de Diretórios
 
 ```bash
 src/
@@ -63,45 +62,46 @@ src/
 │   │   └── GeneralSans-Semibold.woff
 │   └── images/
 │       └── logo.svg
-````
+```
 
 ---
 
-## 🧪 Como rodar o projeto localmente
+## 🧪 Executando Localmente
 
 ```bash
-# Clone o repositório
+# 1️⃣ Clone o repositório
 git clone https://github.com/seu-usuario/waiterapp.git
 cd waiterapp
 
-# Instale as dependências
+# 2️⃣ Instale as dependências
 npm install
 
-# Rode o servidor de desenvolvimento
+# 3️⃣ Inicie o servidor local
 ng serve
 
-# Acesse via navegador
+# 4️⃣ Acesse no navegador
 http://localhost:4200
 ```
 
+---
 
-## 🤝 Contribuição
+## 🤝 Contribuições
 
-Contribuições são bem-vindas!
-Sinta-se à vontade para abrir issues ou enviar PRs com melhorias, correções ou sugestões.
+Quer contribuir com melhorias, novas features ou correções? Bora lá!  
+Abra uma issue ou mande um Pull Request que será muito bem-vindo. ✨
 
 ---
 
-## 🧑‍💻 Autor
+## 👨‍💻 Autor
 
-Desenvolvido por [Leonardo Ribeiro Miclos de Abreu](https://www.linkedin.com/in/leonardomiclos/)
-📫 Contato: [leonardormiclos@gmail.com](mailto:leonardormiclos@gmail.com)
+Desenvolvido por [Leonardo Ribeiro Miclos de Abreu](https://www.linkedin.com/in/leonardomiclos/)  
+📫 Fale comigo: [leonardormiclos@gmail.com](mailto:leonardormiclos@gmail.com)
 
 ---
 
 ## 📃 Licença
 
-Este projeto está licenciado sob a licença **MIT**.
-
+Distribuído sob a licença **MIT**.  
+Liberdade total para usar, modificar e distribuir! 🧑‍🔧
 ```
 
