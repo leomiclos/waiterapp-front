@@ -1,5 +1,3 @@
-
-```markdown
 # 🍽️ WaiterApp — Agilidade na palma da mão
 
 Aplicação web moderna desenvolvida com **Angular** para transformar a experiência de atendimento em bares e restaurantes. Projetada com foco nos **garçons**, oferece uma interface intuitiva, responsiva e com fluidez de app mobile. Seu objetivo? Tornar a gestão de pedidos rápida, prática e profissional.
