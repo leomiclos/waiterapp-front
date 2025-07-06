@@ -4,11 +4,6 @@
 
 Aplicação web moderna desenvolvida com **Angular** para transformar a experiência de atendimento em bares e restaurantes. Projetada com foco nos **garçons**, oferece uma interface intuitiva, responsiva e com fluidez de app mobile. Seu objetivo? Tornar a gestão de pedidos rápida, prática e profissional.
 
-<p align="center">
-  <img src="src/assets/images/logo.svg" alt="Logo do WaiterApp" width="180" />
-</p>
-
----
 
 ## 🚀 Tecnologias de Ponta
 
@@ -23,7 +18,6 @@ Utilizamos o que há de mais sólido e atual no ecossistema web:
 - 📁 Arquitetura por feature, escalável e bem organizada
 - 📱 Pronto para virar um Progressive Web App (PWA)
 
----
 
 ## 🧩 Funcionalidades Principais
 
@@ -36,7 +30,6 @@ Utilizamos o que há de mais sólido e atual no ecossistema web:
   - 👨‍🍳 Painel da Cozinha
   - 📊 Painel Gerencial
 
----
 
 ## 🗂️ Estrutura de Diretórios
 
@@ -103,5 +96,5 @@ Desenvolvido por [Leonardo Ribeiro Miclos de Abreu](https://www.linkedin.com/in/
 
 Distribuído sob a licença **MIT**.  
 Liberdade total para usar, modificar e distribuir! 🧑‍🔧
-```
+
 
