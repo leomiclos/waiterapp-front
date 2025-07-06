@@ -1,0 +1,31 @@
+<div class="login-wrapper">
+  <div class="login">
+    <div>
+      <h2 class="font1 welcome">Bem vindo(a) ao</h2>
+      <h1>
+        <span class="font1">Waiter</span><span class="font2">App</span>
+      </h1>
+
+    </div>
+    <div class="login-container">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <input id="email" formControlName="email" type="email" required />
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            <small class="error">-mail is required.</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" formControlName="password" type="password" required />
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            <small class="error">Password is required.</small>
+          </div>
+        </div>
+
+        <button type="submit" class="login-button" [disabled]="loginForm.invalid">Login</button>
+      </form>
+    </div>
+  </div>
