@@ -7,13 +7,15 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'auth/login',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
     component: MainLayoutComponent,
     children: [
       { path: 'dashboard/home', component: HomeComponent },
-      // { path: 'dashboard/historico', component: HistoricoComponent },
-      // { path: 'dashboard/cardapio', component: CardapioComponent },
-      // { path: 'dashboard/usuarios', component: UsuariosComponent },
-      // { path: 'dashboard/perfil', component: PerfilComponent },
+      // outras rotas...
     ]
   },
   {
@@ -21,7 +23,6 @@ export const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       { path: 'login', component: LoginComponent }
-
     ]
   },
   { path: '**', redirectTo: 'auth/login' }
