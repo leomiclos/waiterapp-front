@@ -17,10 +17,19 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
-
   }
 
+  ngOnInit(){
+    setTimeout(() => this.hideSplash(), 3000)
+  }
 
+  hideSplash() {
+    const splash = document.getElementById('splash-screen');
+    if (splash) {
+      splash.style.opacity = '0';
+      setTimeout(() => splash.remove(), 2500);
+    }
+  }
 
   onSubmit() {
     if (this.loginForm.valid) {

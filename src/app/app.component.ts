@@ -1,5 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -8,25 +9,11 @@ import { Router, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   title = 'waiterapp';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  ngAfterViewInit() {
-    this.routeToLogin();
 
-    const splash = document.getElementById('splash-screen');
-    if (splash) {
-      splash.style.opacity = '0';
-      setTimeout(() => splash.remove(), 300);
-    }
-  }
 
-  routeToLogin() {
-    console.log('Routing to login page...');
-    setTimeout(() => {
-      this.router.navigate(['auth/login']);
-    }, 1000);
-  }
 }
