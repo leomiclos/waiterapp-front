@@ -87,6 +87,8 @@ Abra uma issue ou mande um Pull Request que será muito bem-vindo. ✨
 
 Desenvolvido por [Leonardo Ribeiro Miclos de Abreu](https://www.linkedin.com/in/leonardomiclos/)  
 📫 Fale comigo: [leonardormiclos@gmail.com](mailto:leonardormiclos@gmail.com)
+Layout baseado no curso de Mateus Silva.
+
 
 ---
 

@@ -1,0 +1,36 @@
+<aside class="sidebar">
+  <div class="logo">
+    <h1><b class="font3">W</b><b class="font1">A</b></h1>
+  </div>
+
+  <nav class="menu">
+    <a routerLink="/dashboard/home" routerLinkActive="active">
+      <i class="bi bi-house"></i>
+      <span>Home</span>
+    </a>
+    <a routerLink="/dashboard/historico" routerLinkActive="active">
+      <i class="bi bi-card-text"></i>
+      <span>Histórico</span>
+    </a>
+    <a routerLink="/dashboard/cardapio" routerLinkActive="active">
+      <i class="bi bi-layout-text-sidebar-reverse"></i>
+      <span>Cardápio</span>
+    </a>
+    <a routerLink="/dashboard/usuarios" routerLinkActive="active">
+      <i class="bi bi-people"></i>
+      <span>Usuários</span>
+    </a>
+  </nav>
+
+  <!-- Seção inferior -->
+  <div class="bottom-actions">
+    <a routerLink="/dashboard/perfil" routerLinkActive="active">
+      <i class="bi bi-person-circle"></i>
+      <span>Perfil</span>
+    </a>
+    <button (click)="logout()">
+      <i class="bi bi-box-arrow-right"></i>
+      <span>Sair</span>
+    </button>
+  </div>
+</aside>
