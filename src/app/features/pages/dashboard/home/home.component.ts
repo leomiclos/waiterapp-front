@@ -2,10 +2,11 @@ import { Component, computed, EnvironmentInjector, inject, signal, TemplateRef, 
 import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Pedido } from '../../../../models/pedido.models';
 import { CommonModule } from '@angular/common';
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-home',
-  imports: [NgbDatepickerModule, CommonModule],
+  imports: [NgbDatepickerModule, CommonModule, DragDropModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -169,22 +170,41 @@ export class HomeComponent {
   }
 
   totalDoPedido(pedido: Pedido): number {
-  return pedido.itens.reduce((acc, item) => acc + item.quantidade * item.valor, 0);
+    return pedido.itens.reduce((acc, item) => acc + item.quantidade * item.valor, 0);
   }
 
-statusPedido(status: string | undefined): string {
-  switch (status) {
-    case 'fila':
-      return '🕑 Na fila de espera';
-    case 'producao':
-      return '🧑‍🍳 Em produção';
-    case 'pronto':
-      return '✅ Pronto para entrega';
-    default:
-      return 'Status desconhecido';
+  statusPedido(status: string | undefined): string {
+    switch (status) {
+      case 'fila':
+        return '🕑 Na fila de espera';
+      case 'producao':
+        return '🧑‍🍳 Em produção';
+      case 'pronto':
+        return '✅ Pronto para entrega';
+      default:
+        return 'Status desconhecido';
+    }
   }
-}
 
+  drop(event: CdkDragDrop<Pedido[]>, novoStatus: 'fila' | 'producao' | 'pronto') {
+    if (event.previousContainer === event.container) {
+      // Se arrastou dentro da mesma lista, pode implementar ordenação aqui (opcional)
+      return;
+    }
+
+    const pedidosAtualizados = [...this.pedidos()];
+    const pedidoId = event.item.data.id;
+
+    // Atualiza o status do pedido que foi arrastado
+    const index = pedidosAtualizados.findIndex(p => p.id === pedidoId);
+    if (index !== -1) {
+      pedidosAtualizados[index] = {
+        ...pedidosAtualizados[index],
+        status: novoStatus,
+      };
+      this.pedidos.set(pedidosAtualizados);
+    }
+  }
 
   private getDismissReason(reason: any): string {
     switch (reason) {
