@@ -162,3 +162,10 @@ h1 {
   background-color: #a52020;
   color: white;
 }
+
+.status-order{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

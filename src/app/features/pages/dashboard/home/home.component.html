@@ -1,20 +1,70 @@
 <div class="container">
+  <!-- MODAL DE DETALHES DO PEDIDO -->
+  <ng-template #detalhesPedido let-modal>
+    <div class="header-modal">
+      <h4 class="modal-title">Pedido - Mesa {{ pedidoSelecionado?.mesa }}</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('close')"></button>
+    </div>
+    <div class="status-order">
+      <a>Status do pedido</a>
+      <span>{{ statusPedido(pedidoSelecionado?.status)}}</span>
+    </div>
+    <div class="modal-body" *ngIf="pedidoSelecionado">
+      <span><strong>Itens</strong></span>
+      <ul>
+        <li *ngFor="let item of pedidoSelecionado.itens">
+          {{ item.quantidade }}x {{ item.nome }} - {{ item.valor | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="total d-flex flex-row-reverse mr-3" *ngIf="pedidoSelecionado">
+      Total:&nbsp; {{ totalDoPedido(pedidoSelecionado) | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}
+    </div>
+
+
+
+    <div class="modal-footer">
+
+      <!-- Pedido na fila: mandar pra produção ou cancelar -->
+      <button class="btn btn-warning" *ngIf="pedidoSelecionado?.status === 'fila'" (click)="modal.close('producao')">
+        Mandar pra Produção
+      </button>
+      <button class="btn btn-danger" *ngIf="pedidoSelecionado?.status === 'fila'" (click)="modal.dismiss('cancelar')">
+        Cancelar Pedido
+      </button>
+
+      <!-- Pedido em produção: cancelar (voltar pra fila) ou finalizar -->
+      <button class="btn btn-secondary" *ngIf="pedidoSelecionado?.status === 'producao'" (click)="modal.close('fila')">
+        Voltar pra Fila
+      </button>
+      <button class="btn btn-success" *ngIf="pedidoSelecionado?.status === 'producao'" (click)="modal.close('pronto')">
+        Finalizar
+      </button>
+
+      <!-- Pedido pronto: avisar garçom ou fechar conta -->
+      <button class="btn btn-primary" *ngIf="pedidoSelecionado?.status === 'pronto'" (click)="avisarGarcom()">
+        Avisar Garçom
+      </button>
+      <button class="btn btn-outline-secondary" *ngIf="pedidoSelecionado?.status === 'pronto'"
+        (click)="fecharConta(); modal.close('fechar')">
+        Fechar Conta
+      </button>
+
+    </div>
+
+  </ng-template>
+
+  <!-- MODAL PARA REINICIAR O DIA -->
   <ng-template #content let-modal>
     <div class="header-modal">
       <h4 class="modal-title" id="modal-basic-title">Reiniciar o dia</h4>
-      <button
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      ></button>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
 
     <div class="modal-body">
-      <span
-        >Ao reiniciar o dia, todos os pedidos serão arquivados no status
-        atual.</span
-      >
+      <span>Ao reiniciar o dia, todos os pedidos serão arquivados no status
+        atual.</span>
       <span><strong>Deseja reiniciar o dia?</strong></span>
     </div>
 
@@ -43,27 +93,33 @@
     <!-- Card Fila de Espera -->
     <section class="card">
       <h2>🕑 Fila de Espera</h2>
-      <div class="pedido" *ngFor="let p of fila()">
+      <div class="pedido" *ngFor="let p of fila()" (click)="abrirDetalhes(p, detalhesPedido)">
         <span>Mesa {{ p.mesa }}</span>
-        <span>{{ p.itens }} item{{ p.itens > 1 ? "s" : "" }}</span>
+        <span>
+          {{ totalDeItens(p) }} {{ totalDeItens(p) > 1 ? "itens" : "item" }}
+        </span>
       </div>
     </section>
 
     <!-- Card Em Produção -->
     <section class="card">
       <h2>🧑‍🍳 Em Produção</h2>
-     <div class="pedido" *ngFor="let p of producao()">
+      <div class="pedido" *ngFor="let p of producao()" (click)="abrirDetalhes(p, detalhesPedido)">
         <span>Mesa {{ p.mesa }}</span>
-        <span>{{ p.itens }} item{{ p.itens > 1 ? "s" : "" }}</span>
+        <span>
+          {{ totalDeItens(p) }} {{ totalDeItens(p) > 1 ? "itens" : "item" }}
+        </span>
       </div>
     </section>
 
     <!-- Card Pronto -->
     <section class="card">
       <h2>✅ Pronto</h2>
-      <div class="pedido" *ngFor="let p of pronto()">
+      <div class="pedido" *ngFor="let p of pronto()" (click)="abrirDetalhes(p, detalhesPedido)">
         <span>Mesa {{ p.mesa }}</span>
-        <span>{{ p.itens }} item{{ p.itens > 1 ? "s" : "" }}</span>
+        <span>
+          {{ totalDeItens(p) }} {{ totalDeItens(p) > 1 ? "itens" : "item" }}
+        </span>
       </div>
     </section>
   </div>
