@@ -5,8 +5,7 @@
   overflow-x: hidden;
   font-family: 'GeneralSans-Regular', sans-serif;
 }
-
-/* HEADER */
+/* HEADER PRINCIPAL */
 .header {
   display: flex;
   justify-content: space-between;
@@ -14,17 +13,12 @@
   flex-wrap: wrap;
 }
 
-.header-modal {
+.header-modal{
   display: flex;
   justify-content: space-between;
   padding: 10px;
 }
 
-.status-order{
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-}
 
 h1 {
   display: flex;
@@ -53,14 +47,12 @@ h1 {
     font-size: 16px;
   }
 }
-
 /* TEXTO DE APOIO */
-.container>span {
+.container > span {
   display: block;
   font-size: 1rem;
   margin-bottom: 1rem;
 }
-
 /* WRAPPER DOS CARDS */
 .cards-wrapper {
   display: flex;
@@ -70,7 +62,6 @@ h1 {
   margin-top: 20px;
   padding-bottom: 10px;
 }
-
 /* CARD INDIVIDUAL */
 .card {
   background-color: #eeeeee66;
@@ -92,7 +83,6 @@ h1 {
   color: #1f1f1f;
   margin-bottom: 10px;
 }
-
 /* PEDIDOS DENTRO DOS CARDS */
 .pedido {
   width: 100%;
@@ -119,8 +109,6 @@ h1 {
   background: #f7f6f6;
   transform: translateY(-4px);
 }
-
-/* RESPONSIVIDADE EXTRA PEQUENA */
 @media (max-width: 480px) {
   .pedido {
     font-size: 14px;

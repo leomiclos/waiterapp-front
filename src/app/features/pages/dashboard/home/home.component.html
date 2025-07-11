@@ -3,12 +3,7 @@
   <ng-template #detalhesPedido let-modal>
     <div class="header-modal">
       <h4 class="modal-title">Pedido - Mesa {{ pedidoSelecionado?.mesa }}</h4>
-      <button
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        (click)="modal.dismiss('close')"
-      ></button>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('close')"></button>
     </div>
     <div class="status-order">
       <a>Status do pedido</a>
@@ -27,57 +22,34 @@
     <div class="total d-flex flex-row-reverse mr-3" *ngIf="pedidoSelecionado">
       Total:&nbsp;
       {{
-        totalDoPedido(pedidoSelecionado)
-          | currency : "BRL" : "symbol" : "1.2-2" : "pt-BR"
+      totalDoPedido(pedidoSelecionado)
+      | currency : "BRL" : "symbol" : "1.2-2" : "pt-BR"
       }}
     </div>
 
     <div class="modal-footer">
       <!-- Pedido na fila: mandar pra produção ou cancelar -->
-      <button
-        class="btn btn-warning"
-        *ngIf="pedidoSelecionado?.status === 'fila'"
-        (click)="modal.close('producao')"
-      >
+      <button class="btn btn-warning" *ngIf="pedidoSelecionado?.status === 'fila'" (click)="modal.close('producao')">
         Mandar pra Produção
       </button>
-      <button
-        class="btn btn-danger"
-        *ngIf="pedidoSelecionado?.status === 'fila'"
-        (click)="modal.dismiss('cancelar')"
-      >
+      <button class="btn btn-danger" *ngIf="pedidoSelecionado?.status === 'fila'" (click)="modal.dismiss('cancelar')">
         Cancelar Pedido
       </button>
 
       <!-- Pedido em produção: cancelar (voltar pra fila) ou finalizar -->
-      <button
-        class="btn btn-secondary"
-        *ngIf="pedidoSelecionado?.status === 'producao'"
-        (click)="modal.close('fila')"
-      >
+      <button class="btn btn-secondary" *ngIf="pedidoSelecionado?.status === 'producao'" (click)="modal.close('fila')">
         Voltar pra Fila
       </button>
-      <button
-        class="btn btn-success"
-        *ngIf="pedidoSelecionado?.status === 'producao'"
-        (click)="modal.close('pronto')"
-      >
+      <button class="btn btn-success" *ngIf="pedidoSelecionado?.status === 'producao'" (click)="modal.close('pronto')">
         Finalizar
       </button>
 
       <!-- Pedido pronto: avisar garçom ou fechar conta -->
-      <button
-        class="btn btn-primary"
-        *ngIf="pedidoSelecionado?.status === 'pronto'"
-        (click)="avisarGarcom()"
-      >
+      <button class="btn btn-primary" *ngIf="pedidoSelecionado?.status === 'pronto'" (click)="avisarGarcom()">
         Avisar Garçom
       </button>
-      <button
-        class="btn btn-outline-secondary"
-        *ngIf="pedidoSelecionado?.status === 'pronto'"
-        (click)="fecharConta(); modal.close('fechar')"
-      >
+      <button class="btn btn-outline-secondary" *ngIf="pedidoSelecionado?.status === 'pronto'"
+        (click)="fecharConta(); modal.close('fechar')">
         Fechar Conta
       </button>
     </div>
@@ -87,19 +59,12 @@
   <ng-template #content let-modal>
     <div class="header-modal">
       <h4 class="modal-title" id="modal-basic-title">Reiniciar o dia</h4>
-      <button
-        type="button"
-        class="btn-close"
-        aria-label="Close"
-        (click)="modal.dismiss('Cross click')"
-      ></button>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
 
     <div class="modal-body">
-      <span
-        >Ao reiniciar o dia, todos os pedidos serão arquivados no status
-        atual.</span
-      >
+      <span>Ao reiniciar o dia, todos os pedidos serão arquivados no status
+        atual.</span>
       <span><strong>Deseja reiniciar o dia?</strong></span>
     </div>
 
@@ -126,20 +91,9 @@
   <span>Acompanhe os pedidos dos clientes</span>
   <div class="cards-wrapper" cdkDropListGroup>
     <!-- Card Fila de Espera -->
-    <section
-      class="card"
-      cdkDropList
-      [cdkDropListData]="fila()"
-      (cdkDropListDropped)="drop($event, 'fila')"
-    >
+    <section class="card" cdkDropList [cdkDropListData]="fila()" (cdkDropListDropped)="drop($event, 'fila')">
       <h2>🕑 Fila de Espera</h2>
-      <div
-        class="pedido"
-        *ngFor="let p of fila()"
-        cdkDrag
-        [cdkDragData]="p"
-        (click)="abrirDetalhes(p, detalhesPedido)"
-      >
+      <div class="pedido" *ngFor="let p of fila()" cdkDrag [cdkDragData]="p" (click)="abrirDetalhes(p, detalhesPedido)">
         <span>Mesa {{ p.mesa }}</span>
         <span>
           {{ totalDeItens(p) }} {{ totalDeItens(p) > 1 ? "itens" : "item" }}
@@ -148,20 +102,10 @@
     </section>
 
     <!-- Card Em Produção -->
-    <section
-      class="card"
-      cdkDropList
-      [cdkDropListData]="producao()"
-      (cdkDropListDropped)="drop($event, 'producao')"
-    >
+    <section class="card" cdkDropList [cdkDropListData]="producao()" (cdkDropListDropped)="drop($event, 'producao')">
       <h2>🧑‍🍳 Em Produção</h2>
-      <div
-        class="pedido"
-        *ngFor="let p of producao()"
-        cdkDrag
-        [cdkDragData]="p"
-        (click)="abrirDetalhes(p, detalhesPedido)"
-      >
+      <div class="pedido" *ngFor="let p of producao()" cdkDrag [cdkDragData]="p"
+        (click)="abrirDetalhes(p, detalhesPedido)">
         <span>Mesa {{ p.mesa }}</span>
         <span>
           {{ totalDeItens(p) }} {{ totalDeItens(p) > 1 ? "itens" : "item" }}
@@ -170,20 +114,10 @@
     </section>
 
     <!-- Card Pronto -->
-    <section
-      class="card"
-      cdkDropList
-      [cdkDropListData]="pronto()"
-      (cdkDropListDropped)="drop($event, 'pronto')"
-    >
+    <section class="card" cdkDropList [cdkDropListData]="pronto()" (cdkDropListDropped)="drop($event, 'pronto')">
       <h2>✅ Pronto</h2>
-      <div
-        class="pedido"
-        *ngFor="let p of pronto()"
-        cdkDrag
-        [cdkDragData]="p"
-        (click)="abrirDetalhes(p, detalhesPedido)"
-      >
+      <div class="pedido" *ngFor="let p of pronto()" cdkDrag [cdkDragData]="p"
+        (click)="abrirDetalhes(p, detalhesPedido)">
         <span>Mesa {{ p.mesa }}</span>
         <span>
           {{ totalDeItens(p) }} {{ totalDeItens(p) > 1 ? "itens" : "item" }}
@@ -192,3 +126,4 @@
     </section>
   </div>
 </div>
+

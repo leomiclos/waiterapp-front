@@ -1,22 +1,25 @@
 import { Component, computed, EnvironmentInjector, inject, signal, TemplateRef, WritableSignal } from '@angular/core';
-import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbDatepickerModule, NgbModal, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { Pedido } from '../../../../models/pedido.models';
 import { CommonModule } from '@angular/common';
 import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop';
+import { interval } from 'rxjs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
-  imports: [NgbDatepickerModule, CommonModule, DragDropModule],
+  imports: [NgbDatepickerModule, CommonModule, DragDropModule, NgbToastModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
 
-
-
+  mesaToast: number | null = null;
 
   //não usa mais constructor
   private modalService = inject(NgbModal);
+  private toastr = inject(ToastrService);
   private environmentInjector = inject(EnvironmentInjector)
 
 
@@ -187,24 +190,23 @@ export class HomeComponent {
   }
 
   drop(event: CdkDragDrop<Pedido[]>, novoStatus: 'fila' | 'producao' | 'pronto') {
-    if (event.previousContainer === event.container) {
-      // Se arrastou dentro da mesma lista, pode implementar ordenação aqui (opcional)
-      return;
-    }
+    if (event.previousContainer === event.container) return;
 
     const pedidosAtualizados = [...this.pedidos()];
     const pedidoId = event.item.data.id;
+    const pedido = pedidosAtualizados.find(p => p.id === pedidoId);
 
-    // Atualiza o status do pedido que foi arrastado
-    const index = pedidosAtualizados.findIndex(p => p.id === pedidoId);
-    if (index !== -1) {
-      pedidosAtualizados[index] = {
-        ...pedidosAtualizados[index],
-        status: novoStatus,
-      };
+    if (pedido) {
+      pedido.status = novoStatus;
       this.pedidos.set(pedidosAtualizados);
+      this.mesaToast = pedido.mesa; // 👈 seta a mesa no toast
+      if (pedido.status == 'producao') {
+        this.toastr.success(`O preparo da mesa ${this.mesaToast} iniciou`)
+      }
+
     }
   }
+
 
   private getDismissReason(reason: any): string {
     switch (reason) {
