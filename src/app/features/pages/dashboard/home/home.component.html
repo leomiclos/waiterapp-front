@@ -29,7 +29,7 @@
 
     <div class="modal-footer">
       <!-- Pedido na fila: mandar pra produção ou cancelar -->
-      <button class="btn btn-warning" *ngIf="pedidoSelecionado?.status === 'fila'" (click)="modal.close('producao')">
+      <button class="btn btn-success" *ngIf="pedidoSelecionado?.status === 'fila'" (click)="modal.close('producao')">
         Mandar pra Produção
       </button>
       <button class="btn btn-danger" *ngIf="pedidoSelecionado?.status === 'fila'" (click)="modal.dismiss('cancelar')">
