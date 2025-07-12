@@ -3,6 +3,7 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { LoginComponent } from './features/pages/auth/login/login.component';
 import { HomeComponent } from './features/pages/dashboard/home/home.component';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
+import { DashboardModule } from './features/pages/dashboard/dashboard.module';
 
 export const routes: Routes = [
   {
@@ -14,8 +15,13 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'dashboard/home', component: HomeComponent },
-      // outras rotas...
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./features/pages/dashboard/dashboard.module').then(
+            (m) => m.DashboardModule
+          ),
+      },
     ]
   },
   {

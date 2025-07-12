@@ -4,30 +4,29 @@
   </div>
 
   <nav class="menu">
-    <a routerLink="/dashboard/home" routerLinkActive="active">
+    <button (click)="goTo('home')" [ngClass]="{ 'active': isActive('home') }">
       <i class="bi bi-house"></i>
       <span>Home</span>
-    </a>
-    <a routerLink="/dashboard/historico" routerLinkActive="active">
+    </button>
+    <button (click)="goTo('historico')" [ngClass]="{ 'active': isActive('historico') }">
       <i class="bi bi-card-text"></i>
       <span>Histórico</span>
-    </a>
-    <a routerLink="/dashboard/cardapio" routerLinkActive="active">
+    </button>
+    <button (click)="goTo('cardapio')" [ngClass]="{ 'active': isActive('cardapio') }">
       <i class="bi bi-layout-text-sidebar-reverse"></i>
       <span>Cardápio</span>
-    </a>
-    <a routerLink="/dashboard/usuarios" routerLinkActive="active">
+    </button>
+    <button (click)="goTo('usuarios')" [ngClass]="{ 'active': isActive('usuarios') }">
       <i class="bi bi-people"></i>
       <span>Usuários</span>
-    </a>
+    </button>
   </nav>
 
-  <!-- Seção inferior -->
   <div class="bottom-actions">
-    <a routerLink="/dashboard/perfil" routerLinkActive="active">
+    <button (click)="goTo('perfil')" [ngClass]="{ 'active': isActive('perfil') }">
       <i class="bi bi-person-circle"></i>
       <span>Perfil</span>
-    </a>
+    </button>
     <button (click)="logout()">
       <i class="bi bi-box-arrow-right"></i>
       <span>Sair</span>

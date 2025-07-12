@@ -120,3 +120,24 @@ span{
   color: #a52020;
   cursor: pointer;
 }
+
+
+.sidebar .menu button {
+  all: unset;
+  color: #666;
+  font-size: 24px;
+  transition: color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.sidebar .menu button:hover {
+  color: #a52020;
+}
+
+.sidebar .menu button.active {
+  color: #a52020;
+}
