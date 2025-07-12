@@ -1,1 +1,98 @@
-<p>historico works!</p>
+<div class="container">
+  <div class="header d-flex justify-content-between align-items-center mb-3">
+    <h1>
+      <i class="bi bi-card-text"></i>
+      Histórico
+    </h1>
+  </div>
+
+  <span> Visualize pedidos anteriores </span>
+
+  <div class="table-area">
+    <span class="mt-2">
+      <strong>Pedidos ({{ pedidosFiltrados.length }})</strong>
+    </span>
+    <div class="table-responsive mt-3">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Mesa</th>
+            <th>
+              Data
+              <a
+                class="bi-funnel funnel"
+                [ngClass]="ordemAsc ? 'bi-funnel-fill' : 'bi-funnel'"
+                (click)="aplicarFiltro()"
+              ></a>
+            </th>
+            <th>Nome</th>
+
+            <th>Total</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of pedidosFiltrados">
+            <td>{{ pedido.mesa }}</td>
+            <td>{{ pedido.data | date : "short" }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let item of pedido.itens">
+                  {{ item.nome }} (x{{ item.quantidade }})
+                </li>
+              </ul>
+            </td>
+
+            <td>{{ calculaTotal(pedido) | currency : "BRL" : "symbol" }}</td>
+
+            <td>
+              <!-- <button
+                class="btn btn-sm btn-outline-primary me-2"
+                (click)="verDetalhes(pedido, detalhesPedido)"
+              >
+                <i class="bi bi-eye"></i>
+              </button> -->
+              <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="excluirPedido(pedido)"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="pedidosFiltrados.length === 0">
+            <td colspan="6" class="text-center">
+              Nenhum pedido encontrado para essa data.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- Modal para detalhes do pedido -->
+<ng-template #detalhesPedido let-modal>
+  <div class="header-modal">
+    <h4 class="modal-title">Mesa {{ pedidoSelecionado?.mesa }}</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <h4>Itens</h4>
+    <p><strong>Cliente:</strong> {{ pedidoSelecionado?.cliente }}</p>
+    <p><strong>Alimento:</strong> {{ pedidoSelecionado?.nome }}</p>
+    <p><strong>Categoria:</strong> {{ pedidoSelecionado?.categoria }}</p>
+    <p><strong>Data:</strong> {{ pedidoSelecionado?.data | date : "short" }}</p>
+    <p>
+      <strong>Total:</strong>
+      {{ pedidoSelecionado?.total | currency : "BRL" : "symbol" }}
+    </p>
+  </div>
+  <div class="buttons">
+    <button class="btn btn-secondary" (click)="modal.close()">Fechar</button>
+  </div>
+</ng-template>
