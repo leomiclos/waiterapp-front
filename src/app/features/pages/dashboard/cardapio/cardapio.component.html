@@ -1,0 +1,61 @@
+<div class="cardapio-container">
+  <h2>📋 Cardápio</h2>
+  <p>Gerencie os produtos do seu estabelecimento</p>
+
+  <div class="tabs">
+    <button
+      [class.active]="abaSelecionada === 'produtos'"
+      (click)="mudarAba('produtos')">Produtos</button>
+
+    <button
+      [class.active]="abaSelecionada === 'categorias'"
+      (click)="mudarAba('categorias')">Categorias</button>
+  </div>
+
+  <!-- Produtos -->
+  <div *ngIf="abaSelecionada === 'produtos'">
+    <div class="header">
+      <h3>Produtos <span class="badge">{{ produtos.length }}</span></h3>
+      <button class="novo-produto">Novo Produto</button>
+    </div>
+
+    <table class="produtos-table">
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Nome</th>
+          <th>Categoria</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos">
+          <td><img [src]="produto.imagemUrl" alt="Imagem" class="img-produto" /></td>
+          <td>{{ produto.nome }}</td>
+          <td>🍕 {{ produto.categoria }}</td>
+          <td>R$ {{ produto.preco | number:'1.2-2' }}</td>
+          <td>
+            <button (click)="editarProduto(produto.id)">✏️</button>
+            <button (click)="excluirProduto(produto.id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Categorias -->
+  <div *ngIf="abaSelecionada === 'categorias'">
+    <div class="header">
+      <h3>Categorias <span class="badge">{{ categorias.length }}</span></h3>
+      <button class="novo-produto">Nova Categoria</button>
+    </div>
+
+    <ul class="lista-categorias">
+    <li *ngFor="let cat of categorias">
+      <span>{{ cat.emoji }} {{ cat.nome }}</span>
+      <button class="btn-delete" (click)="excluirCategoria(cat.nome)">🗑️</button>
+    </li>
+  </ul>
+  </div>
+</div>

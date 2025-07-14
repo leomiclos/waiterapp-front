@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { HistoricoComponent } from './historico/historico.component';
+import { CardapioComponent } from './cardapio/cardapio.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 const routes: Routes = [
@@ -13,14 +15,14 @@ const routes: Routes = [
     path: 'historico',
     component: HistoricoComponent,
   },
-  // {
-  //   path: 'cardapio',
-  //   component: CardapioComponent,
-  // },
-  // {
-  //   path: 'usuarios',
-  //   component: UsuariosComponent,
-  // },
+  {
+    path: 'cardapio',
+    component: CardapioComponent,
+  },
+  {
+    path: 'usuarios',
+    component: UsuariosComponent,
+  },
   {
     path: '',
     redirectTo: 'home',
