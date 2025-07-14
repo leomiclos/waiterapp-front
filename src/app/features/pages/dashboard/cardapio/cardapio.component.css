@@ -1,8 +1,38 @@
-.cardapio-container {
-  padding: 24px;
+/* Base Styles & Typography */
+body {
+  margin: 0;
   font-family: 'Poppins', sans-serif;
+  color: #333;
 }
 
+/* Reusable Button Styles */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  /* Ensure consistent font for buttons */
+}
+
+/* Input & Textarea Base Styles */
+textarea,
+input[type="text"] {
+  width: 100%;
+  padding: 10px 14px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  box-sizing: border-box;
+  /* Include padding and border in the element's total width and height */
+}
+
+/* Cardápio Container */
+.cardapio-container {
+  padding: 24px;
+}
+
+/* Tabs Navigation */
 .tabs {
   display: flex;
   gap: 10px;
@@ -11,26 +41,19 @@
 
 .tabs button {
   padding: 8px 16px;
-  border: none;
   background-color: #eee;
-  cursor: pointer;
-  border-radius: 5px;
+  color: #333;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
-thead{
-  background-color: #f5f5f5;
-}
-
-button{
-  background: none;
-  border: none;
-}
-
-.tabs .active {
+.tabs button.active {
   background-color: #ff4c4c;
   color: white;
 }
 
+/* Header Section */
 .header {
   display: flex;
   justify-content: space-between;
@@ -40,22 +63,25 @@ button{
 
 .badge {
   background-color: #ccc;
-  padding: 2px 8px;
-  border-radius: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
   margin-left: 5px;
 }
 
 .novo-produto {
-  background-color: transparent;
-  color: red;
-  border: none;
-  cursor: pointer;
+  color: #e53935;
+  font-weight: bold;
+  font-size: 14px;
 }
 
+/* Products Table */
 .produtos-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 25px;
+  font-size: 15px;
 }
 
 .produtos-table th,
@@ -63,6 +89,11 @@ button{
   border-bottom: 1px solid #ddd;
   padding: 12px;
   text-align: left;
+  vertical-align: middle;
+}
+
+thead {
+  background-color: #f5f5f5;
 }
 
 .img-produto {
@@ -71,6 +102,8 @@ button{
   object-fit: cover;
   border-radius: 8px;
 }
+
+/* Categories List */
 .lista-categorias {
   list-style: none;
   padding: 0;
@@ -88,13 +121,163 @@ button{
 }
 
 .btn-delete {
-  background: none;
-  border: none;
   color: red;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal {
+  /* Renamed from .modal-custom to simplify, assuming it's the primary modal */
+  background: #fff;
+  width: 90%;
+  max-width: 960px;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.imagem-edicao {
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.imagem-edicao img {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 100%;
+}
+
+.alterar-imagem {
+  margin-top: 12px;
+  color: #e53935;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.form-edicao label {
+  display: block;
+  font-size: 14px;
+  color: #444;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.categoria {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.btn-alterar {
+  color: #e53935;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Ingredients Section */
+.ingredientes h4 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.lista-ing {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0;
+  list-style: none;
+  margin-top: 12px;
+
+}
+
+.lista-ing li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.lista-ing label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #555;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+  accent-color: #ff4c4c;
   cursor: pointer;
 }
 
-.tabs button.active {
-  background-color: #ff4c4c;
-  color: #fff;
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.btn-excluir {
+  color: red;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.btn-salvar {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  transition: 0.2s ease;
+}
+
+.btn-salvar:hover {
+  background-color: #43a047;
 }

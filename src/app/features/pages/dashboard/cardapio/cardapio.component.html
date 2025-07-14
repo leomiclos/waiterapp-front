@@ -2,20 +2,22 @@
   <h2>📋 Cardápio</h2>
   <p>Gerencie os produtos do seu estabelecimento</p>
 
+  <!-- Tabs -->
   <div class="tabs">
-    <button
-      [class.active]="abaSelecionada === 'produtos'"
-      (click)="mudarAba('produtos')">Produtos</button>
-
-    <button
-      [class.active]="abaSelecionada === 'categorias'"
-      (click)="mudarAba('categorias')">Categorias</button>
+    <button [class.active]="abaSelecionada === 'produtos'" (click)="mudarAba('produtos')">
+      Produtos
+    </button>
+    <button [class.active]="abaSelecionada === 'categorias'" (click)="mudarAba('categorias')">
+      Categorias
+    </button>
   </div>
 
   <!-- Produtos -->
   <div *ngIf="abaSelecionada === 'produtos'">
     <div class="header">
-      <h3>Produtos <span class="badge">{{ produtos.length }}</span></h3>
+      <h3>
+        Produtos <span class="badge">{{ produtos.length }}</span>
+      </h3>
       <button class="novo-produto">Novo Produto</button>
     </div>
 
@@ -31,12 +33,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let produto of produtos">
-          <td><img [src]="produto.imagemUrl" alt="Imagem" class="img-produto" /></td>
-          <td>{{ produto.nome }}</td>
-          <td>🍕 {{ produto.categoria }}</td>
-          <td>R$ {{ produto.preco | number:'1.2-2' }}</td>
           <td>
-            <button (click)="editarProduto(produto.id)">✏️</button>
+            <img [src]="produto.imagemUrl" alt="Imagem" class="img-produto" />
+          </td>
+          <td>{{ produto.nome }}</td>
+          <td>{{ produto.categoria }}</td>
+          <td>R$ {{ produto.preco | number : "1.2-2" }}</td>
+          <td>
+            <button (click)="abrirModalProduto(produto, modalProduto)">
+              ✏️
+            </button>
             <button (click)="excluirProduto(produto.id)">🗑️</button>
           </td>
         </tr>
@@ -47,15 +53,114 @@
   <!-- Categorias -->
   <div *ngIf="abaSelecionada === 'categorias'">
     <div class="header">
-      <h3>Categorias <span class="badge">{{ categorias.length }}</span></h3>
+      <h3>
+        Categorias <span class="badge">{{ categorias.length }}</span>
+      </h3>
       <button class="novo-produto">Nova Categoria</button>
     </div>
 
-    <ul class="lista-categorias">
-    <li *ngFor="let cat of categorias">
-      <span>{{ cat.emoji }} {{ cat.nome }}</span>
-      <button class="btn-delete" (click)="excluirCategoria(cat.nome)">🗑️</button>
-    </li>
-  </ul>
+    <table class="produtos-table">
+      <thead>
+        <tr>
+          <th>Emoji</th>
+          <th>Nome</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cat of categorias">
+          <td>{{ cat.emoji }}</td>
+          <td>{{ cat.nome }}</td>
+          <td>
+            <button class="btn-action" (click)="abrirModalCategoria(cat, modalCategoria)">
+              ✏️
+            </button>
+            <button class="btn-delete" (click)="excluirCategoria(cat.nome)">
+              🗑️
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
+
+<ng-template #modalProduto>
+  <div class="modal-custom">
+    <div class="modal-header">
+      <h2>Editar Produto</h2>
+      <button class="close-btn" (click)="modalService.dismissAll()">✕</button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="form-edicao">
+        <div class="imagem-edicao">
+          <img [src]="produtoSelecionado?.imagemUrl" alt="Produto" />
+          <button class="alterar-imagem">📷 Alterar Imagem</button>
+        </div>
+        <label>Nome do Produto
+          <input type="text" [(ngModel)]="produtoSelecionado!.nome" />
+        </label>
+
+        <label>Descrição
+          <textarea rows="2" maxlength="110" [(ngModel)]="produtoSelecionado!.descricao"></textarea>
+        </label>
+
+        <label>Categoria
+          <div class="categoria">
+            {{ produtoSelecionado?.categoria }}
+            <button class="btn-alterar">Alterar</button>
+          </div>
+        </label>
+      </div>
+      <div class="ingredientes">
+        <h4>Ingredientes</h4>
+        <input type="text" placeholder="Ex: Queijo" />
+        <ul class="lista-ing">
+          <li *ngFor="let ing of ingredientesDisponiveis">
+            <label>
+              <input type="checkbox" [checked]="ingredientesSelecionados.includes(ing.nome)"
+                (change)="alternarIngrediente(ing.nome)" />
+              {{ ing.emoji }} {{ ing.nome }}
+            </label>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-excluir">Excluir Produto</button>
+      <button class="btn-salvar" (click)="salvarAlteracoes()">
+        Salvar Alterações
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #modalCategoria>
+  <div class="modal-custom">
+    <div class="modal-header">
+      <h2>Editar Categoria</h2>
+      <button class="close-btn" (click)="modalService.dismissAll()">✕</button>
+    </div>
+
+    <div class="modal-body" style="display: flex; flex-direction: column; gap: 16px">
+      <label>Nome da Categoria
+        <input type="text" [(ngModel)]="categoriaSelecionada.nome" />
+      </label>
+
+      <label>Emoji da Categoria
+        <input type="text" maxlength="2" [(ngModel)]="categoriaSelecionada.emoji" />
+      </label>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-salvar" (click)="salvarCategoria()">
+        Salvar Alterações
+      </button>
+    </div>
+  </div>
+</ng-template>

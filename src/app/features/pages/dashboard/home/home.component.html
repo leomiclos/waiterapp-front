@@ -103,7 +103,7 @@
 
     <!-- Card Em Produção -->
     <section class="card" cdkDropList [cdkDropListData]="producao()" (cdkDropListDropped)="drop($event, 'producao')">
-      <h2>🧑‍🍳 Em Produção</h2>
+      <h2>🧑‍🍳 Em Produção </h2>
       <div class="pedido" *ngFor="let p of producao()" cdkDrag [cdkDragData]="p"
         (click)="abrirDetalhes(p, detalhesPedido)">
         <span>Mesa {{ p.mesa }}</span>
